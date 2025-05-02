@@ -1,0 +1,51 @@
+feature_id,location_id,name,type,area
+1,1,Parking Lot Zone 3,Commercial,2113.85
+2,2,Commercial Zone 30,Road,6578.4
+3,2,Residential Zone 92,Commercial,6711.37
+4,2,Parking Lot Zone 64,Commercial,9082.23
+5,3,Green Space Zone 89,Parking Lot,6117.43
+6,4,Road Zone 80,Industrial,2838.2
+7,4,Green Space Zone 57,Parking Lot,9285.82
+8,5,Commercial Zone 69,Green Space,5884.03
+9,6,Residential Zone 4,Residential,7148.55
+10,7,Road Zone 29,Industrial,2229.44
+11,8,Residential Zone 40,Commercial,9729.06
+12,8,Parking Lot Zone 30,Green Space,4864.32
+13,9,Green Space Zone 6,Road,5925.37
+14,10,Parking Lot Zone 14,Parking Lot,5557.26
+15,10,Industrial Zone 90,Industrial,2833.91
+16,10,Commercial Zone 55,Road,4627.76
+17,11,Green Space Zone 48,Parking Lot,7302.08
+18,11,Residential Zone 25,Green Space,8272.99
+19,12,Industrial Zone 20,Residential,5957.63
+20,12,Parking Lot Zone 46,Commercial,2254.82
+21,13,Green Space Zone 78,Industrial,2688.84
+22,13,Road Zone 54,Industrial,4646.59
+23,14,Commercial Zone 13,Road,5435.62
+24,14,Road Zone 21,Parking Lot,6441.57
+25,15,Residential Zone 27,Parking Lot,8775.95
+26,15,Residential Zone 93,Residential,6744.59
+27,16,Commercial Zone 42,Parking Lot,7748.8
+28,17,Road Zone 12,Parking Lot,6847.26
+29,17,Commercial Zone 92,Parking Lot,3253.85
+30,18,Commercial Zone 100,Green Space,3582.45
+31,18,Green Space Zone 64,Commercial,3242.02
+32,18,Industrial Zone 98,Residential,2735.98
+33,19,Road Zone 68,Industrial,5723.01
+34,20,Residential Zone 79,Parking Lot,1287.5
+35,20,Parking Lot Zone 28,Residential,3537.46
+36,20,Residential Zone 62,Green Space,2759.82
+37,21,Residential Zone 31,Road,3253.52
+38,22,Residential Zone 86,Industrial,8040.42
+39,22,Road Zone 56,Industrial,7925.21
+40,22,Residential Zone 37,Industrial,6066.73
+41,23,Green Space Zone 93,Green Space,3714.61
+42,23,Green Space Zone 43,Commercial,2565.9
+43,24,Green Space Zone 4,Parking Lot,7516.17
+44,25,Parking Lot Zone 11,Residential,8954.34
+45,25,Commercial Zone 47,Green Space,3117.5
+46,26,Industrial Zone 39,Industrial,5934.6
+47,27,Industrial Zone 62,Parking Lot,2117.23
+48,27,Parking Lot Zone 59,Parking Lot,4984.2
+49,27,Residential Zone 51,Residential,3205.61
+50,28,Parking Lot Zone 17,Green Space,8957.44

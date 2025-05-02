@@ -1,0 +1,5 @@
+satellite_id,name,type,operator,launch_date
+1,Landsat-8,Earth Observation,NASA,2013-02-11
+2,Sentinel-2A,Earth Observation,ESA,2015-06-23
+3,Terra,Earth Observation,NASA,1999-12-18
+4,MODIS,Climate Monitoring,NASA,2002-05-04
