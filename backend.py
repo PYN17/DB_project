@@ -1,9 +1,10 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import create_engine, text
+from dotenv import load_dotenv
+import os
 
-# Database connection(current have issue with)
-DATABASE_URL = "postgresql+psycopg2://pyn@localhost:5432/satdata"
+DATABASE_URL = "postgresql://yixiangkong:Kyx$20040509@localhost:5432/412_project"
 engine = create_engine(DATABASE_URL)
 
 app = FastAPI()
