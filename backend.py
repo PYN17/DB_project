@@ -4,8 +4,7 @@ from sqlalchemy import create_engine, text
 from dotenv import load_dotenv
 import os
 
-DATABASE_URL = "postgresql://pyn:@localhost:5432/satdata"
-# "postgresql://yixiangkong:Kyx$20040509@localhost:5432/412_project"
+DATABASE_URL = "postgresql://isaac:orphic@localhost:5433/FinalProject"
 engine = create_engine(DATABASE_URL)
 
 app = FastAPI()
@@ -136,3 +135,23 @@ def get_weather_data(
             return [dict(row._mapping) for row in result]
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+    
+@app.get("/location-coordinates")
+def get_coordinates(location: str = Query(...)):
+    try:
+        query = text("""
+            SELECT latitude, longitude
+            FROM location
+            WHERE LOWER(name) = LOWER(:location)
+            LIMIT 1
+        """)
+        with engine.connect() as conn:
+            result = conn.execute(query, {"location": location})
+            row = result.fetchone()
+            if row:
+                return {"latitude": row[0], "longitude": row[1]}
+            else:
+                raise HTTPException(status_code=404, detail="Location not found.")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
