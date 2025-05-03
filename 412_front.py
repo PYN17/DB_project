@@ -20,6 +20,34 @@ def query_db(sql, params=None):
 st.set_page_config(layout="wide")
 st.title("🌆 Arizona Urban Heat Island (UHI) Dashboard")
 
+
+#Query definition
+uhi_query = """
+    SELECT date AS date, surface_temp, air_temp, (surface_temp - air_temp) AS UHI
+    FROM heat_island
+    WHERE location = %s AND date BETWEEN %s AND %s
+    ORDER BY odate
+"""
+
+obs_query = """
+    SELECT timestamp, temperature, satellite_id
+    FROM observation
+    WHERE location = %s AND timestamp BETWEEN %s AND %s
+    ORDER BY timestamp
+"""
+aq_query = """
+    SELECT timestamp, PM2_5, NO2, O3
+    FROM air_quality
+    WHERE location = %s AND timestamp BETWEEN %s AND %s
+    ORDER BY timestamp
+"""
+weather_query = """
+    SELECT observation_date, temp, humidity, wind_speed, precipitation
+    FROM weather_data
+    WHERE location = %s AND observation_date BETWEEN %s AND %s
+    ORDER BY observation_date
+"""
+
 # MOCK DATA
 locations = ["Phoenix", "Tucson", "Yuma", "Flagstaff"]
 
@@ -34,40 +62,23 @@ if len(date_range) == 2:
 else:
     start_date = end_date = None
 
-# === SIMULATED DATA ===
 if st.sidebar.button("Load Data") and start_date and end_date:
 
+    #handle time stamp conversion
+    start_date = datetime.combine(date_range[0], datetime.min.time())
+    end_date = datetime.combine(date_range[1], datetime.max.time())
+
     # Sample UHI data 
-    uhi_df = pd.DataFrame({
-        "date": pd.date_range(start=start_date, end=end_date),
-        "surface_temp": [32 + i*0.2 for i in range((end_date - start_date).days + 1)],
-        "air_temp": [30 + i*0.1 for i in range((end_date - start_date).days + 1)],
-        "UHI": [2 + 0.1*i for i in range((end_date - start_date).days + 1)]
-    })
+    uhi_df = query_db(uhi_query, (location, start_date, end_date))
 
     # Sample Observation data 
-    obs_df = pd.DataFrame({
-        "timestamp": pd.date_range(start=start_date, periods=10),
-        "temperature": [28 + i for i in range(10)],
-        "satellite_id": ["MODIS"] * 10
-    })
+    obs_df = query_db(obs_query, (location, start_date, end_date))
 
     # Sample Air Quality 
-    aq_df = pd.DataFrame({
-        "timestamp": pd.date_range(start=start_date, periods=10),
-        "PM2_5": [12 + i for i in range(10)],
-        "NO2": [5 + i for i in range(10)],
-        "O3": [18 + i for i in range(10)]
-    })
+    aq_df = query_db(aq_query, (location, start_date, end_date))
 
     # Sample Weather Data 
-    weather_df = pd.DataFrame({
-        "observation_date": pd.date_range(start=start_date, periods=5),
-        "temp": [30 + i for i in range(5)],
-        "humidity": [40 + i for i in range(5)],
-        "wind_speed": [5 + i for i in range(5)],
-        "precipitation": [0, 1, 0, 0, 2]
-    })
+    weather_df = query_db(weather_query, (location, start_date, end_date))
 
     # UHI Trends
     st.subheader("📈 UHI Trend")
