@@ -40,7 +40,11 @@ if load_data:
                 "start_date": str(start_date),
                 "end_date": str(end_date)
             }).json()
+            
             uhi_df = pd.DataFrame(uhi)
+            st.write("Raw UHI response:", uhi)
+            st.write("UHI DataFrame preview:", uhi_df)
+
 
             # --- Observations ---
             obs = requests.get(f"{API_URL}/observations", params={
@@ -67,30 +71,23 @@ if load_data:
             weather_df = pd.DataFrame(weather)
 
             # === Visualizations ===
-            st.subheader("📈 UHI Trend")
-            if not uhi_df.empty and 'date' in uhi_df.columns:
-                fig1 = px.line(uhi_df, x="date", y=["surface_temp", "air_temp", "UHI"])
-                st.plotly_chart(fig1)
+            st.subheader("📈 UHI Effect Over Time")
+            required_cols = {"date", "surface_temp", "air_temp", "uhi"}
+            if not uhi_df.empty and required_cols.issubset(uhi_df.columns):
+                uhi_df = uhi_df.dropna(subset=required_cols)
+                if not uhi_df.empty:
+                    fig = px.line(
+                        uhi_df,
+                        x="date",
+                        y=["surface_temp", "air_temp", "uhi"],
+                        labels={"value": "Temperature (°C)", "variable": "Metric"},
+                        title="Surface Temp, Air Temp, and UHI Over Time"
+                    )
+                    st.plotly_chart(fig, use_container_width=True)
+                else:
+                    st.warning("UHI data exists but contains missing values.")
             else:
-                st.warning("No UHI data found for the selected range.")
-
-            st.subheader("🛰 Satellite Observations")
-            if not obs_df.empty and 'timestamp' in obs_df.columns:
-                st.plotly_chart(px.scatter(obs_df, x="timestamp", y="temperature", color="satellite_name"))
-            else:
-                st.warning("No observation data found for the selected range.")
-
-            st.subheader("🌫 Air Quality")
-            if not aq_df.empty and 'timestamp' in aq_df.columns:
-                st.plotly_chart(px.line(aq_df, x="timestamp", y=["PM2_5", "NO2", "O3"]))
-            else:
-                st.warning("No air quality data found for the selected range.")
-
-            st.subheader("🌦 Weather Data")
-            if not weather_df.empty:
-                st.dataframe(weather_df)
-            else:
-                st.warning("No weather data found for the selected range.")
+                st.warning("No valid UHI data found for the selected location and date range.")
 
         except Exception as e:
             st.error(f"Error loading data: {e}")
