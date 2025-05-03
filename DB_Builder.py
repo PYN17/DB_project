@@ -67,7 +67,7 @@ dtype_map = {
         "no2": "NUMERIC",
         "o3": "NUMERIC",
         "__constraints__": [
-            "PRIMARY KEY (air_quality_id)"
+            "PRIMARY KEY (aq_id)"
             ]
     },
     "observation": {
@@ -101,7 +101,7 @@ dtype_map = {
         "name": "character varying(255)",
         "latitude": "NUMERIC",
         "longitude": "NUMERIC",
-        "__constraints__": [ "PRIMARY KEY (weather_station_id)"]
+        "__constraints__": [ "PRIMARY KEY (station_id)"]
     },
     "urban_feature": {
         "feature_id": "INTEGER",
