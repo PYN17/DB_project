@@ -5,7 +5,7 @@ from getpass import getpass
 #get input from user
 username = input("Enter your PostgreSQL username: ")
 password = getpass("Enter your PostgreSQL password: ")
-new_db_name = input("Enter the name of the new database to create: ")
+new_db_name = input("Enter the name of the new database to be create: ")
 
 #connect to default postgres
 conn_init = psycopg2.connect(
@@ -52,7 +52,10 @@ dtype_map = {
         "UHI": "NUMERIC",
         "surface_tmp": "NUMERIC",
         "vege_index": "NUMERIC",
-        "air_temp": "NUMERIC"
+        "air_temp": "NUMERIC",
+        "__constraints__": [
+            "PRIMARY KEY (effect_id)",
+        ]
     },
     "air_quality": {
         "aq_id": "INTEGER",
@@ -62,7 +65,10 @@ dtype_map = {
         "pm10": "NUMERIC",
         "co": "NUMERIC",
         "no2": "NUMERIC",
-        "o3": "NUMERIC"
+        "o3": "NUMERIC",
+        "__constraints__": [
+            "PRIMARY KEY (air_quality_id)"
+            ]
     },
     "observation": {
         "observation_id": "INTEGER",
@@ -74,7 +80,10 @@ dtype_map = {
         "temperature": "NUMERIC",
         "lst": "NUMERIC",
         "ndvi": "NUMERIC",
-        "emission": "NUMERIC"
+        "emission": "NUMERIC",
+        "__constraints__": [
+            "PRIMARY KEY (observation_id)"
+        ]
     },
     "location": {
         "location_id": "INTEGER",
@@ -82,20 +91,27 @@ dtype_map = {
         "latitude": "NUMERIC",
         "longitude": "NUMERIC",
         "elevation": "NUMERIC",
-        "pop_density": "NUMERIC"
+        "pop_density": "NUMERIC",
+        "__constraints__": [
+            "PRIMARY KEY (location_id)"
+        ]
     },
     "weather_station": {
         "station_id": "INTEGER",
         "name": "character varying(255)",
         "latitude": "NUMERIC",
-        "longitude": "NUMERIC"
+        "longitude": "NUMERIC",
+        "__constraints__": [ "PRIMARY KEY (weather_station_id)"]
     },
     "urban_feature": {
         "feature_id": "INTEGER",
         "location_id": "INTEGER",
         "name": "character varying(255)",
         "type": "character varying(255)",
-        "area": "NUMERIC"
+        "area": "NUMERIC",
+        "__constraints__": [
+            "PRIMARY KEY (feature_id)"
+        ]
     },
     "weather_data": {
         "weather_id": "INTEGER",
@@ -104,14 +120,16 @@ dtype_map = {
         "temp": "NUMERIC",
         "humidity": "NUMERIC",
         "wind_speed": "NUMERIC",
-        "precipitation": "NUMERIC"
+        "precipitation": "NUMERIC",
+        "__constraints__": [ "PRIMARY KEY (weather_id)"]
     },
     "satellite": {
         "satellite_id": "INTEGER",
         "name": "character varying(255)",
         "type": "character varying(255)",
         "operator": "character varying(255)",
-        "launch_date": "date"
+        "launch_date": "date",
+        "__constraints__": [ "PRIMARY KEY (satellite_id)"]
     }
 }
 

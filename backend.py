@@ -4,7 +4,8 @@ from sqlalchemy import create_engine, text
 from dotenv import load_dotenv
 import os
 
-DATABASE_URL = "postgresql://yixiangkong:Kyx$20040509@localhost:5432/412_project"
+DATABASE_URL = "postgresql://pyn:@localhost:5432/satdata"
+
 engine = create_engine(DATABASE_URL)
 
 app = FastAPI()
