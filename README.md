@@ -53,7 +53,7 @@ Data is ingested from CSV files into PostgreSQL tables:
 
 - Gained hands-on experience in environmental data analytics and urban climate research.
 
---
+---
 
 ## 📌 Future Enhancements
 
